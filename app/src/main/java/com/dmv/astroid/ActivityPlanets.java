@@ -20,17 +20,17 @@ public class ActivityPlanets  extends AppCompatActivity {
 
         List<PlanetOnList> planetList = new ArrayList<>();
         //imagenes
-        planetList.add(new PlanetOnList("Mercurio", R.drawable.mercurio));
-        planetList.add(new PlanetOnList("Venus", R.drawable.venus));
-        planetList.add(new PlanetOnList("Tierra", R.drawable.tierra));
-        planetList.add(new PlanetOnList("Marte", R.drawable.marte));
-        planetList.add(new PlanetOnList("Jupiter", R.drawable.jupiter));
-        planetList.add(new PlanetOnList("Saturno", R.drawable.saturno));
-        planetList.add(new PlanetOnList("Urano", R.drawable.urano));
-        planetList.add(new PlanetOnList("Neptuno", R.drawable.neptuno));
-        planetList.add(new PlanetOnList("Plutón", R.drawable.pluton));
-        planetList.add(new PlanetOnList("Sedna", R.drawable.sedna));
-        planetList.add(new PlanetOnList("Eris", R.drawable.eris));
+        planetList.add(new PlanetOnList("Mercurio", R.drawable.mercurio, "mercury"));
+        planetList.add(new PlanetOnList("Venus", R.drawable.venus, "venus"));
+        planetList.add(new PlanetOnList("Tierra", R.drawable.tierra, "earth"));
+        planetList.add(new PlanetOnList("Marte", R.drawable.marte, "mars"));
+        planetList.add(new PlanetOnList("Jupiter", R.drawable.jupiter, "jupiter"));
+        planetList.add(new PlanetOnList("Saturno", R.drawable.saturno, "saturn"));
+        planetList.add(new PlanetOnList("Urano", R.drawable.urano, "uranus"));
+        planetList.add(new PlanetOnList("Neptuno", R.drawable.neptuno, "neptune"));
+        planetList.add(new PlanetOnList("Plutón", R.drawable.pluton, "pluto"));
+        planetList.add(new PlanetOnList("Sedna", R.drawable.sedna, "sedna"));
+        planetList.add(new PlanetOnList("Eris", R.drawable.eris, "eris"));
 
         PlanetListAdapter adapter = new PlanetListAdapter(planetList);
         recyclerView.setAdapter(adapter);
