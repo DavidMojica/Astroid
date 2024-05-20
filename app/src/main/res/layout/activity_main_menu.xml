@@ -7,107 +7,72 @@
     android:layout_height="match_parent"
     tools:context=".MainMenuActivity">
 
-    <!-- Parte superior: nombre de la aplicación y logotipos -->
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black">
+
     <LinearLayout
-        android:id="@+id/topLayout"
+        android:id="@+id/barra_superior"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:gravity="center"
-        android:background="@color/colorPrimaryDark"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:orientation="horizontal"
+        android:padding="16dp">
 
-        <!-- Nombre de la aplicación -->
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Nombre de tu Aplicación"
-            android:textColor="@android:color/black"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="8dp"/>
+            android:layout_weight="1"
+            android:text="Karim Space"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-        <!-- Logotipos -->
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/perfil_usuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/barra_superior"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginRight="16dp" />
+
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-            <!-- Logotipo 1 -->
-            <ImageView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_launcher_background"
-                android:layout_marginEnd="16dp"/>
+                android:text="Karim Saif"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
 
-            <!-- Logotipo 2 -->
-            <ImageView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_launcher_background"/>
+                android:text="12334"
+                android:textSize="14sp" />
 
         </LinearLayout>
 
     </LinearLayout>
+    </RelativeLayout>
 
-    <!-- Sección inferior: botones como tarjetas -->
 
-    <LinearLayout
-        android:id="@+id/bottomLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topLayout"
-        app:layout_constraintVertical_bias="0.634">
-
-        <!-- Tarjeta 1 -->
-
-        <!-- Tarjeta 2 -->
-
-        <!-- Tarjeta 3 -->
-
-    </LinearLayout>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="8dp"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="297dp">
-
-        <!-- Contenido de la tarjeta 3 -->
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="8dp"
-        tools:layout_editor_absoluteX="17dp"
-        tools:layout_editor_absoluteY="598dp">
-
-        <!-- Contenido de la tarjeta 2 -->
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="8dp"
-        tools:layout_editor_absoluteX="17dp"
-        tools:layout_editor_absoluteY="407dp">
-
-        <!-- Contenido de la tarjeta 1 -->
-
-    </androidx.cardview.widget.CardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
