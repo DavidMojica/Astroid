@@ -12,7 +12,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainLobbyActivity extends AppCompatActivity {
-
     Button button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
