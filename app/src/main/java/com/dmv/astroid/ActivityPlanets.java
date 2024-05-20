@@ -1,6 +1,9 @@
 package com.dmv.astroid;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.AdapterView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -32,8 +35,16 @@ public class ActivityPlanets  extends AppCompatActivity {
         planetList.add(new PlanetOnList("Sedna", R.drawable.sedna, "sedna"));
         planetList.add(new PlanetOnList("Eris", R.drawable.eris, "eris"));
 
-        PlanetListAdapter adapter = new PlanetListAdapter(planetList);
+        PlanetListAdapter adapter = new PlanetListAdapter(planetList, new PlanetListAdapter.OnItemClickListener(){
+            @Override
+            public void onItemClick(PlanetOnList planet){
+                Intent SendPlanet = new Intent(ActivityPlanets.this, DetailsActivity.class);
+                SendPlanet.putExtra("name", planet.getENGName());
+                startActivity(SendPlanet);
+            }
+        });
         recyclerView.setAdapter(adapter);
+
     }
 
 }
