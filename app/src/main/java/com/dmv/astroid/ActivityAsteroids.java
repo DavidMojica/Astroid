@@ -1,11 +1,10 @@
 package com.dmv.astroid;
 
-import android.content.Intent;
-import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.Bundle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,14 +38,7 @@ public class ActivityAsteroids extends AppCompatActivity {
         planetList.add(new PlanetOnList("Vesta", R.drawable.vesta,"vesta"));
 
 
-            PlanetListAdapter adapter = new PlanetListAdapter(planetList,new PlanetListAdapter.OnItemClickListener(){
-            @Override
-            public void onItemClick(PlanetOnList planet){
-                Intent SendPlanet = new Intent(ActivityAsteroids.this, DetailsActivity.class);
-                SendPlanet.putExtra("name", planet.getENGName());
-                startActivity(SendPlanet);
-            }
-        });
+            PlanetListAdapter adapter = new PlanetListAdapter(planetList);
             recyclerView.setAdapter(adapter);
         }
     }

@@ -35,7 +35,7 @@ public class ActivityPlanets  extends AppCompatActivity {
         planetList.add(new PlanetOnList("Sedna", R.drawable.sedna, "sedna"));
         planetList.add(new PlanetOnList("Eris", R.drawable.eris, "eris"));
 
-        PlanetListAdapter adapter = new PlanetListAdapter(planetList,new PlanetListAdapter.OnItemClickListener(){
+        PlanetListAdapter adapter = new PlanetListAdapter(planetList, new PlanetListAdapter.OnItemClickListener(){
             @Override
             public void onItemClick(PlanetOnList planet){
                 Intent SendPlanet = new Intent(ActivityPlanets.this, DetailsActivity.class);
