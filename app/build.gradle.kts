@@ -43,5 +43,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation ("com.airbnb.android:lottie:6.4.0")
     implementation("com.github.bumptech.glide:glide:4.11.0")
+    implementation ("com.google.code.gson:gson:2.8.")
+    implementation ("com.squareup.retrofit2:converter-jackson:2.9.0")
 
 }
