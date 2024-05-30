@@ -3,6 +3,7 @@ package com.dmv.astroid;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.dmv.astroid.Apod.ApiService;
 import com.dmv.astroid.Apod.PeticionesApod;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,6 +29,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,7 +42,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class ActivityApod extends AppCompatActivity {
 
-    private String URL_API="a";
+    private String URL_API = "a";
     private static final String BASE_URL = "https://api.nasa.gov/";
     private EditText txtFecha;
     private TextView txtTitulo;
@@ -50,12 +55,16 @@ public class ActivityApod extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_apod);
-        txtFecha= findViewById(R.id.etxtFecha);
+
+        txtFecha = findViewById(R.id.etxtFecha);
         txtTitulo = findViewById(R.id.txtTitulo);
         img = findViewById(R.id.imgFoto);
         btnBuscar = findViewById(R.id.buttonBuscar);
         txtDesc = findViewById(R.id.txtDescripción);
         btnLimpiar = findViewById(R.id.buttonLimpiar);
+
+        TextInputEditText etxtFecha = findViewById(R.id.etxtFecha);
+        etxtFecha.setOnClickListener(view -> showDatePickerDialog(etxtFecha));
 
         //CARGAR LA INFORMACIÓN
         btnBuscar.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +72,7 @@ public class ActivityApod extends AppCompatActivity {
             public void onClick(View v) {
                 String fecha = txtFecha.getText().toString();
                 //Variable con la url de la api, unida con la fecha
-                URL_API= "https://api.nasa.gov/planetary/apod?api_key=AGliNv58pfqiVucf1tafeuBuAqivgfoNIWKbbCM3&date="+fecha;
+                URL_API = "https://api.nasa.gov/planetary/apod?api_key=AGliNv58pfqiVucf1tafeuBuAqivgfoNIWKbbCM3&date=" + fecha;
                 //Toast.makeText(getApplicationContext(), "URL:"+URL_API, Toast.LENGTH_LONG).show();
                 //buscar(fecha);
                 obtenerRecursosDesdeAPI();
@@ -81,8 +90,6 @@ public class ActivityApod extends AppCompatActivity {
         });
 
     }
-
-
 
     //BUSCAR LA URL
     private void obtenerRecursosDesdeAPI() {
@@ -102,14 +109,14 @@ public class ActivityApod extends AppCompatActivity {
             public void onResponse(Call<String> call, Response<String> response) {
 
                 try {
-                    if(response.isSuccessful()){
+                    if (response.isSuccessful()) {
                         String jsonString = response.body();
                         //Esta es la cadena JSON convertida a String para usarse
                         obtenerUrlImagenDesdeJSON(jsonString);
                         obtenerTituloDesdeJSON(jsonString);
                         obtenerDescDesdeJSON(jsonString);
                     }
-                }catch (Exception ex){
+                } catch (Exception ex) {
                     Toast.makeText(getApplicationContext(), ex.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
@@ -120,6 +127,7 @@ public class ActivityApod extends AppCompatActivity {
             }
         });
     }
+
     //OBTENER LA IMAGEN
     private void obtenerUrlImagenDesdeJSON(String jsonString) {
         try {
@@ -157,5 +165,21 @@ public class ActivityApod extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+    private void showDatePickerDialog(TextInputEditText etxtFecha) {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                (view, selectedYear, selectedMonth, selectedDay) -> {
+                    Calendar selectedDate = Calendar.getInstance();
+                    selectedDate.set(selectedYear, selectedMonth, selectedDay);
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                    etxtFecha.setText(format.format(selectedDate.getTime()));
+                }, year, month, day);
+
+        datePickerDialog.show();
     }
 }
