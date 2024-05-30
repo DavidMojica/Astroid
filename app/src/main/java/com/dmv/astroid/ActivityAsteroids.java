@@ -39,14 +39,13 @@ public class ActivityAsteroids extends AppCompatActivity {
         planetList.add(new PlanetOnList("Vesta", R.drawable.vesta,"vesta"));
 
 
-            PlanetListAdapter adapter = new PlanetListAdapter(planetList,new PlanetListAdapter.OnItemClickListener(){
-            @Override
-            public void onItemClick(PlanetOnList planet){
-                Intent SendPlanet = new Intent(ActivityAsteroids.this, DetailsActivity.class);
-                SendPlanet.putExtra("name", planet.getENGName());
-                startActivity(SendPlanet);
-            }
+        PlanetListAdapter adapter = new PlanetListAdapter(planetList, planet -> {
+            Intent sendPlanet = new Intent(ActivityAsteroids.this, DetailsActivity.class);
+            sendPlanet.putExtra("name", planet.getENGName());
+            startActivity(sendPlanet);
         });
-            recyclerView.setAdapter(adapter);
-        }
+        recyclerView.setAdapter(adapter);
+
+
+    }
     }

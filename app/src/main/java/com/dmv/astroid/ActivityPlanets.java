@@ -42,6 +42,9 @@ public class ActivityPlanets  extends AppCompatActivity {
         });
         recyclerView.setAdapter(adapter);
 
+
+
+
     }
 
 }

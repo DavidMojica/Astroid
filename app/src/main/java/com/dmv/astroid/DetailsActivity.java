@@ -3,6 +3,8 @@ package com.dmv.astroid;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dmv.astroid.modelos.Objeto;
@@ -10,56 +12,71 @@ import com.dmv.astroid.modelos.Objeto;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class DetailsActivity extends AppCompatActivity {
-    String name;
-    SolarSystemApi apiService;
-    TextView detailsTextView;
+
+    private TextView detailsTextView;
+    private SolarSystemApi apiService;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
         detailsTextView = findViewById(R.id.detailsTextView);
 
-        // Obtener el Intent
-        Intent getData = this.getIntent();
-        if(getData != null){
-            name = getData.getStringExtra("name");
+        // Recupera el Intent que inició esta actividad
+        Intent intent = getIntent();
+        String planetName = intent.getStringExtra("name");
+
+        // Configura Retrofit
+        apiService = RetrofitClient.getClient().create(SolarSystemApi.class);
+
+        // Hacer una llamada a la API si es necesario
+        if (planetName != null) {
+            // Actualiza el TextView con el nombre del planeta
+            getPlanetDetails(planetName);
+            // Puedes hacer una llamada a la API aquí si necesitas más detalles
+            // getPlanetDetails(planetName);
+        } else {
+            detailsTextView.setText("No planet name provided");
         }
-
-        // Configurar Retrofit
-        Retrofit retrofit = RetrofitClient.getClient("https://api.le-systeme-solaire.net/");
-        apiService = retrofit.create(SolarSystemApi.class);
-
-        // Obtener y mostrar detalles del planeta
-        getPlanetDetails(name);
     }
 
-    private void getPlanetDetails(String planetId) {
-        Call<Objeto> call = apiService.getBodyDetails(planetId);
+    private void getPlanetDetails(String planetName) {
+        Call<Objeto> call = apiService.getPlanetDetails(planetName);
         call.enqueue(new Callback<Objeto>() {
             @Override
             public void onResponse(Call<Objeto> call, Response<Objeto> response) {
-                if (response.isSuccessful()) {
-                    Objeto body = response.body();
-                    if (body != null) {
-                        String details = "Name: " + body.getEnglishName() + "\n" +
-                                "Semimajor Axis: " + body.getSemimajorAxis() + "\n" +
-                                "Perihelion: " + body.getPerihelion() + "\n" +
-                                "Aphelion: " + body.getAphelion() + "\n" +
-                                "Density: " + body.getDensity() + "\n" +
-                                "Gravity: " + body.getGravity();
-                        detailsTextView.setText(details);
-                    }
+                if (response.isSuccessful() && response.body() != null) {
+                    // Actualiza el TextView con los detalles del planeta
+
+
+                    Objeto details = response.body();
+                    StringBuilder detailsText = new StringBuilder();
+                    detailsText.append("Name: ").append(details.getEnglishName()).append("\n")
+                            .append("Density: ").append(details.getDensity()).append(" g/cm^3\n")
+                            .append("Gravity: ").append(details.getGravity()).append(" m/s^2\n")
+                            .append("Mean Radius: ").append(details.getMeanRadius()).append(" km\n")
+                            .append("SemimajorAxis: ").append(details.getSemimajorAxis()).append("\n")
+                            .append("EquaRadius: ").append(details.getEquaRadius()).append("\n")
+                            .append("PolarRadius: ").append(details.getPolarRadius()).append("\n")
+                            .append("AlternativeName: ").append(details.getAlternativeName()).append("\n")
+                            .append("Inclination: ").append(details.getInclination()).append("\n");
+                        detailsTextView.setText(detailsText.toString());
+
+                }
+                else if(response.isSuccessful() == false){
+                    detailsTextView.setText("Error success");
+                }
+                else{
+                    detailsTextView.setText("Error body");
                 }
             }
 
             @Override
             public void onFailure(Call<Objeto> call, Throwable t) {
-                detailsTextView.setText("Failed to load data");
+                detailsTextView.setText("Error retrieving planet details");
             }
         });
     }
