@@ -1,6 +1,9 @@
 package com.dmv.astroid.modelos;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
+
+
 
 public class Objeto {
     private String id;
@@ -35,6 +38,11 @@ public class Objeto {
     private double argPeriapsis;
     private double longAscNode;
     private String bodyType;
+
+    public class ApiResponse {
+        @JsonProperty("bodies")
+        public List<Objeto> bodies;
+    }
 
     // Getters y Setters
     public String getId() {
