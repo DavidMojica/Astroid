@@ -33,7 +33,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
-            android:text="La Nasa en tus Manos"
+            android:text="Nasa in your hands"
             android:textColor="@color/Lavander"
             android:textSize="14sp"
             app:layout_constraintEnd_toStartOf="@+id/AppImage"
@@ -191,34 +191,12 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
-                android:layout_weight="1"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="20dp">
+                android:layout_weight="1">
 
                 <RelativeLayout
-                    android:background="@color/white"
+                    android:background="@color/background"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/People"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/PeopleImg"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:text="Space People"
-                        android:textColor="@color/Lavander"
-                        android:textSize="20sp" />
-
-                    <ImageView
-                        android:id="@+id/PeopleImg"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="15dp"
-                        android:src="@drawable/rocketspace" />
 
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>

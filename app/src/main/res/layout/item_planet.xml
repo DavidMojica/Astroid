@@ -9,12 +9,14 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginEnd="16dp"
-        android:contentDescription="@string/planet_image">
-    </de.hdodenhof.circleimageview.CircleImageView>
+        android:contentDescription="@string/planet_image"></de.hdodenhof.circleimageview.CircleImageView>
 
     <TextView
         android:id="@+id/planetName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"/>
+        android:fontFamily="@font/poppins_semibold"
+        android:textColor="@color/Lavander"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 </LinearLayout>
